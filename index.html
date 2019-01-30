@@ -16,14 +16,14 @@
 		<p id = "weather">Weather : </p>
 
 	  <script>
-	  	
+
 	  	$('button').on('click' , function(){
 	  	var locationEntered = $('#location').val();
 	  	console.log(locationEntered);
 
 	 	$.ajax({
 			type: 'GET',
-			url: "http://localhost:3000/"+locationEntered,
+			url: "https://radiant-taiga-42314.herokuapp.com/"+locationEntered,
 			contentType: 'application/json',
 			dataType:'json',
 			headers: {
