@@ -1,0 +1,46 @@
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<title>Location</title>
+		<script
+	  src="https://code.jquery.com/jquery-3.3.1.js"
+	  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+	  crossorigin="anonymous"></script>
+
+	</head>
+	<body>
+		<h1>Location : <input type="text" id="location"/></h1>
+		<button type = "submit" id = "get_weather">Get weather</button>
+		<p id = "lat">Latitude : </p>
+		<p id = "lng">Longitude : </p>
+		<p id = "weather">Weather : </p>
+
+	  <script>
+	  	
+	  	$('button').on('click' , function(){
+	  	var locationEntered = $('#location').val();
+	  	console.log(locationEntered);
+
+	 	$.ajax({
+			type: 'GET',
+			url: "http://localhost:3000/"+locationEntered,
+			contentType: 'application/json',
+			dataType:'json',
+			headers: {
+			'Access-Control-Allow-Credentials' : true,	
+			'Access-Control-Allow-Origin':'*',
+			'Access-Control-Allow-Methods':'GET',
+			'Content-type':'application/json',
+			},
+			responseType:'application/json',
+			success:function(data){
+				$('#lat').html('Latitude:   '+data.Latitude);
+				$('#lng').html('Longitude:   '+data.longitude);
+				$('#weather').html('Temperature:   '+data.temperature.fah);
+		}
+	});
+	  	});
+	  </script>
+
+	</body>
+	</html>

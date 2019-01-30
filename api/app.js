@@ -2,11 +2,23 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 const request = require('request');
+var cors = require('cors');
+
+headers = {
+  'allowedHeaders': ['sessionId', 'Content-Type'],
+  'exposedHeaders': ['sessionId'],
+  'origin': '*',
+  'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  'preflightContinue': false
+}
+app.use(cors());
+
 
 //IqWugQDJLId0anKrGvLPMPYPVe2sPPmh
 app.get('/:location' , (request1 , response) => {
-	var location = request1.params.location;
- 	const url = 'https://www.mapquestapi.com/geocoding/v1/address?key=IqWugQDJLId0anKrGvLPMPYPVe2sPPmh&inFormat=kvp&outFormat=json&location='+location+'&thumbMaps=false';
+	var locationPlace = request1.params.location;
+	console.log(locationPlace);
+ 	const url = 'https://www.mapquestapi.com/geocoding/v1/address?key=IqWugQDJLId0anKrGvLPMPYPVe2sPPmh&inFormat=kvp&outFormat=json&location='+locationPlace+'&thumbMaps=false';
  	var encodedurl = encodeURI(url);
 	request(url , (err , res , body) => {
 		var data  = JSON.parse(body);
